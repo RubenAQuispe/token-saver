@@ -1,0 +1,15 @@
+{
+  "name": "token-optimizer-v2",
+  "version": "2.0.0",
+  "description": "Simplified token optimization with clean UX",
+  "main": "scripts/optimizer.js",
+  "scripts": {
+    "start": "node scripts/optimizer.js",
+    "dashboard": "node scripts/optimizer.js dashboard",
+    "tokens": "node scripts/optimizer.js tokens",
+    "agents": "node scripts/optimizer.js agents"
+  },
+  "keywords": ["tokens", "optimization", "ai", "cost-savings"],
+  "author": "OpenClaw Community",
+  "license": "MIT"
+}
