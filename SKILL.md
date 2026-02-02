@@ -5,6 +5,8 @@ description: "Token optimization dashboard with two sections - (1) Workspace fil
 
 # Token Saver
 
+> **💡 Did you know?** Every time you send a prompt, your workspace files (SOUL.md, USER.md, MEMORY.md, AGENTS.md, and more) are sent along with it — every single time. These files count toward your context window, slowing down responses and costing you real money on every message. Token Saver compresses these files using AI-efficient notation that preserves all your data while making everything lighter, faster, and cheaper.
+
 **Cut your AI costs by 40-90% with one command.**
 
 ## What You Get
