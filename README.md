@@ -1,4 +1,4 @@
-# 🚀 Token Optimizer
+# 🚀 Token Saver
 
 **Cut your OpenClaw AI costs by 40-90% with one command.**
 
@@ -77,10 +77,10 @@ Total:            ~$54.97/month possible saving
 
 ```bash
 # From ClawHub
-clawhub install token-optimizer
+clawhub install token-saver
 
 # Or clone directly
-git clone https://github.com/RubenAQuispe/token-optimizer.git
+git clone https://github.com/RubenAQuispe/token-saver.git
 ```
 
 ## Safety First

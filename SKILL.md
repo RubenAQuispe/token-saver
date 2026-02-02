@@ -1,9 +1,9 @@
 ---
-name: token-optimizer
+name: token-saver
 description: "Token optimization dashboard with two sections - (1) Workspace file compression for ALL .md files in context, (2) AI model audit that detects current models and suggests cheaper alternatives. Shows \"possible savings\" until optimizations are applied. Triggers on \"optimize tokens\", \"reduce AI costs\", \"model audit\", \"save money on AI\"."
 ---
 
-# Token Optimizer
+# Token Saver
 
 **Cut your AI costs by 40-90% with one command.**
 
