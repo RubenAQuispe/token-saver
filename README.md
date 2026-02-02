@@ -85,11 +85,19 @@ clawhub install token-saver
 git clone https://github.com/RubenAQuispe/token-saver.git
 ```
 
+## ✨ Persistent Mode — One-and-Done
+
+When you run `/optimize tokens`, Token Saver also enables **Persistent Mode** — your AI will continue writing in compressed notation going forward. No need to re-optimize!
+
+- **Automatic** — Enabled when you optimize, disabled when you revert
+- **Smart** — AI maintains compressed format in all workspace files
+- **Reversible** — `/optimize revert` turns it off and restores everything
+
 ## Safety First
 
 - ✅ **Auto-backup** before any file changes
 - ✅ **"Possible savings"** shown until you actually apply
-- ✅ **One-command revert** — `/optimize revert` restores everything
+- ✅ **One-command revert** — `/optimize revert` restores everything + turns off persistent mode
 - ✅ Only compresses files where real savings exist
 
 ## How It Works

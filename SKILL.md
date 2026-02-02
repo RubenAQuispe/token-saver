@@ -32,11 +32,21 @@ A clean dashboard showing:
 | `/optimize models` | Detailed model cost comparison |
 | `/optimize revert` | Restore files from backups |
 
+## ✨ Persistent Mode (Auto-Enabled)
+
+When you run `/optimize tokens`, the skill also enables **Persistent Mode** — a one-liner instruction added to AGENTS.md that tells your AI to keep writing in compressed notation going forward. This means:
+
+- **One-and-done optimization** — files stay lean as your AI adds new content
+- **No re-optimization needed** — AI maintains the compressed format automatically  
+- **Easy to turn off** — `/optimize revert` removes persistent mode and restores all files
+
+Without persistent mode, workspace files would gradually grow back to verbose format as your AI writes new entries.
+
 ## Safety
 
 - **Auto-backup** before any file change
 - **"Possible savings"** shown until you actually apply
-- **One-command revert** — `/optimize revert` restores everything
+- **One-command revert** — `/optimize revert` restores everything + turns off persistent mode
 - Only compresses files where real savings exist
 
 ## How It Works

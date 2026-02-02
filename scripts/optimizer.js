@@ -249,15 +249,62 @@ ${this.formatAvailableModels()}
             }
         });
 
+        // Enable persistent AI-efficient writing mode
+        const persistentEnabled = this.enablePersistentMode(workspacePath);
+
         const monthlySavings = (totalSaved * 0.003 * 4.33);
 
         console.log(`\n💾 **Optimization Complete!**
 • **Files optimized:** ${filesChanged}/${results.length}
 • **Tokens saved:** ${totalSaved.toLocaleString()}
 • **Actual savings:** ~$${monthlySavings.toFixed(2)}/month
+${persistentEnabled ? '• **✨ Persistent Mode: ON** — AI will maintain compressed format going forward' : '• **Persistent Mode:** Already enabled'}
 
 🛡️  Backups created (.backup extension)
-➤ \`/optimize revert\` to restore originals`);
+➤ \`/optimize revert\` to restore originals + turn off persistent mode`);
+    }
+
+    /**
+     * Enable persistent AI-efficient writing mode by adding instruction to AGENTS.md
+     * This ensures the AI continues writing in compressed notation after optimization
+     */
+    enablePersistentMode(workspacePath) {
+        const agentsPath = path.join(workspacePath, 'AGENTS.md');
+        if (!fs.existsSync(agentsPath)) return false;
+
+        const content = fs.readFileSync(agentsPath, 'utf8');
+        const marker = '## 📝 Token Saver — Persistent Mode';
+        
+        // Already enabled
+        if (content.includes(marker)) return false;
+
+        const instruction = `
+${marker}
+**Status: ENABLED** — Turn off with \`/optimize revert\`
+
+When writing to workspace .md files (MEMORY.md, USER.md, TOOLS.md, SOUL.md, etc.),
+always use AI-efficient notation:
+- Dense key:value format over verbose paragraphs
+- Symbols over words (→, +, |, &)  
+- Abbreviations over full phrases
+- One-liners over multi-line explanations
+- Preserve all meaning, minimize all tokens
+
+**Example:** Instead of writing "Ruben prefers to receive brief morning updates 
+with a review of tasks and any urgent items", write:
+\`MORNING: greeting → review(todos+pending+urgent)\`
+
+This keeps workspace files lean so they cost less on every API call.
+`;
+
+        // Backup AGENTS.md before modifying
+        const backupPath = agentsPath + '.backup';
+        if (!fs.existsSync(backupPath)) {
+            fs.copyFileSync(agentsPath, backupPath);
+        }
+
+        fs.appendFileSync(agentsPath, instruction);
+        return true;
     }
 
     revertChanges(target, workspacePath) {
@@ -286,7 +333,29 @@ ${this.formatAvailableModels()}
             console.log(`✅ Restored: ${path.basename(originalPath)}`);
         });
 
-        console.log(`\n✅ **Revert Complete!** ${toRevert.length} file(s) restored.`);
+        // Also remove persistent mode from AGENTS.md if it was added
+        this.disablePersistentMode(workspacePath);
+
+        console.log(`\n✅ **Revert Complete!** ${toRevert.length} file(s) restored.
+• **Persistent Mode: OFF** — AI will write normally again`);
+    }
+
+    /**
+     * Remove persistent mode instruction from AGENTS.md
+     */
+    disablePersistentMode(workspacePath) {
+        const agentsPath = path.join(workspacePath, 'AGENTS.md');
+        if (!fs.existsSync(agentsPath)) return;
+
+        const content = fs.readFileSync(agentsPath, 'utf8');
+        const marker = '## 📝 Token Saver — Persistent Mode';
+        const markerIndex = content.indexOf(marker);
+        
+        if (markerIndex === -1) return;
+
+        // Remove everything from the marker to the end of the persistent mode section
+        const before = content.substring(0, markerIndex).trimEnd();
+        fs.writeFileSync(agentsPath, before + '\n');
     }
 
     findBackups(workspacePath) {
