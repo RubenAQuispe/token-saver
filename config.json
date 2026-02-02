@@ -1,0 +1,38 @@
+{
+  "workspaceFiles": {
+    "common": [
+      "SOUL.md",
+      "USER.md", 
+      "AGENTS.md",
+      "MEMORY.md",
+      "HEARTBEAT.md",
+      "TOOLS.md",
+      "IDENTITY.md"
+    ],
+    "patterns": [
+      "*.md"
+    ],
+    "exclude": [
+      "README.md",
+      "CHANGELOG.md",
+      "LICENSE.md",
+      "CONTRIBUTING.md",
+      "*.backup",
+      "*.compressed.md",
+      "*.tmp",
+      "*.log",
+      "node_modules/**",
+      ".git/**"
+    ]
+  },
+  "compression": {
+    "minSizeBytes": 100,
+    "minTokens": 25,
+    "minCompressionPotential": 10
+  },
+  "analysis": {
+    "sessionsPerWeek": 7,
+    "avgApiCallsPerSession": 20,
+    "avgOutputTokensPerSession": 15000
+  }
+}

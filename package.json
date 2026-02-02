@@ -1,7 +1,7 @@
 {
-  "name": "token-optimizer-v2",
-  "version": "2.0.0",
-  "description": "Simplified token optimization with clean UX",
+  "name": "token-optimizer",
+  "version": "1.0.0",
+  "description": "Cut your OpenClaw AI costs by 40-90%. Dashboard with workspace file compression and AI model audit.",
   "main": "scripts/optimizer.js",
   "scripts": {
     "start": "node scripts/optimizer.js",

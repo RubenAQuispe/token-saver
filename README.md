@@ -1,9 +1,9 @@
-# 🚀 Token Optimizer v2
+# 🚀 Token Optimizer
 
 **Cut your OpenClaw AI costs by 40-90% with one command.**
 
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
 
 ## Quick Start
 
@@ -77,10 +77,10 @@ Total:            ~$54.97/month possible saving
 
 ```bash
 # From ClawHub
-clawhub install token-optimizer-v2
+clawhub install token-optimizer
 
 # Or clone directly
-git clone https://github.com/RubenAQuispe/token-optimizer-v2.git
+git clone https://github.com/RubenAQuispe/token-optimizer.git
 ```
 
 ## Safety First
