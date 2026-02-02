@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Token Optimizer v2 - Redesigned
+ * Token Saver - Dashboard
  * 
  * Two sections:
  * 1. Workspace Files - Scans ALL .md files, shows "possible savings" until applied
@@ -50,7 +50,7 @@ class TokenOptimizerV2 {
         const hasBackups = this.findBackups(workspacePath).length > 0;
         const savingsLabel = hasBackups ? 'Actual savings' : 'Possible saving';
 
-        console.log(`🚀 **Token Optimizer Dashboard**
+        console.log(`🚀 **Token Saver Dashboard**
 
 💾 **Current Context:** ${analysis.totalTokens.toLocaleString()} tokens across ${analysis.fileList.length} files
 💰 **Est. Monthly Cost:** $${(analysis.monthlyCostEstimate || 0).toFixed(2)}

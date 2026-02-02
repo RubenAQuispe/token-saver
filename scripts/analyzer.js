@@ -125,28 +125,39 @@ class TokenAnalyzer {
             models.default.detectedFrom = 'environment';
         }
 
-        // Try to read gateway config
+        // Try to read OpenClaw gateway config
+        const homedir = process.env.USERPROFILE || process.env.HOME || '';
         const configPaths = [
-            path.join(workspacePath, '.openclaw', 'config.json'),
-            path.join(workspacePath, '..', '.openclaw', 'config.json'),
-            path.join(process.env.APPDATA || '', 'openclaw', 'config.json'),
+            path.join(homedir, '.openclaw', 'openclaw.json'),
+            path.join(workspacePath, '.openclaw', 'openclaw.json'),
+            path.join(workspacePath, '..', '.openclaw', 'openclaw.json'),
         ];
 
         for (const configPath of configPaths) {
             try {
                 if (fs.existsSync(configPath)) {
                     const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-                    if (config.model) {
-                        models.default.model = config.model;
-                        models.default.detectedFrom = configPath;
+                    const agentDefaults = config?.agents?.defaults || {};
+                    
+                    // Primary model
+                    const primary = agentDefaults?.model?.primary;
+                    if (primary) {
+                        models.default.model = primary.replace('anthropic/', '').replace('google/', '');
+                        models.default.detectedFrom = 'openclaw.json';
                     }
-                    if (config.cronModel) {
-                        models.cron.model = config.cronModel;
-                        models.cron.detectedFrom = configPath;
+                    
+                    // Heartbeat/cron model
+                    const heartbeatModel = agentDefaults?.heartbeat?.model;
+                    if (heartbeatModel) {
+                        models.cron.model = heartbeatModel.replace('anthropic/', '').replace('google/', '');
+                        models.cron.detectedFrom = 'openclaw.json';
                     }
-                    if (config.subagentModel) {
-                        models.subagent.model = config.subagentModel;
-                        models.subagent.detectedFrom = configPath;
+                    
+                    // Subagent model
+                    const subModel = agentDefaults?.subagents?.model;
+                    if (subModel) {
+                        models.subagent.model = subModel.replace('anthropic/', '').replace('google/', '');
+                        models.subagent.detectedFrom = 'openclaw.json';
                     }
                     break;
                 }
